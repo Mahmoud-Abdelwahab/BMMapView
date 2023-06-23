@@ -39,18 +39,14 @@ public class BMMapView: UIView {
 extension BMMapView {
     
     func setupUI() {
-      //  loadViewFromNib()
-        let bundle = Bundle(for: BMMapView.self)
-        fromNib(viewType: BMMapView.self, frombunde: bundle)
+        loadViewFromNib()
         mapView.delegate = self
     }
     
     private func loadViewFromNib() {
         let bundle = Bundle(for: BMMapView.self)
         let nib = UINib(nibName: "BMMapView", bundle: bundle)
-        debugPrint(nib.description)
-        debugPrint(nib, "🚀")
-        let view = nib.instantiate(withOwner: BMMapView.self, options: nil).first as! UIView
+        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
         view.frame = bounds
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(view)
