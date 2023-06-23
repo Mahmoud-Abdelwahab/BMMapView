@@ -8,7 +8,7 @@
 import UIKit
 import MapKit
 
-class BMMapView: UIView {
+public class BMMapView: UIView {
     
     // MARK: - Outlets
     @IBOutlet weak private var mapView: MKMapView!
@@ -19,12 +19,12 @@ class BMMapView: UIView {
     private var canShowCallout: Bool?
     
     // MARK: - Init
-    override init(frame: CGRect) {
+    public  override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
@@ -51,7 +51,7 @@ extension BMMapView: MKMapViewDelegate {
    
     // MARK: - MKMapViewDelegate
     
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+    public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         guard let annotation = view.annotation else { return }
         let bmAnnotation = BMAnnotation(
             coordinate: annotation.coordinate,
@@ -61,7 +61,7 @@ extension BMMapView: MKMapViewDelegate {
         delegate?.didSelectAnnotation(bmAnnotation)
     }
     
-    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+    public func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
         delegate?.didDrageOnMap()
     }
     
@@ -100,11 +100,11 @@ extension BMMapView: MKMapViewDelegate {
 
 extension BMMapView: BMMapInputType {
     
-    func addAnnotations(_ annotatios: [BMAnnotation]) {
+    public func addAnnotations(_ annotatios: [BMAnnotation]) {
         annotatios.forEach(addAnnotation)
     }
     
-    func centerToLocation(_ location: CLLocation, regionRadius: CLLocationDistance) {
+    public func centerToLocation(_ location: CLLocation, regionRadius: CLLocationDistance) {
         let coordinateRegion = MKCoordinateRegion(
             center: location.coordinate,
             latitudinalMeters: regionRadius,
@@ -113,7 +113,7 @@ extension BMMapView: BMMapInputType {
         print("💥", location, regionRadius)
     }
     
-    func addAnnotation(_ annotation: BMAnnotation) {
+    public func addAnnotation(_ annotation: BMAnnotation) {
         let annotations = MKPointAnnotation()
         annotations.title = annotation.title
         annotations.coordinate = annotation.coordinate
@@ -122,36 +122,36 @@ extension BMMapView: BMMapInputType {
         print("💥", annotation)
     }
     
-    func removeAnnotation(_ annotation: MKAnnotation) {
+    public func removeAnnotation(_ annotation: MKAnnotation) {
         print("💥", annotation)
     }
     
-    func removeAnnotations(_ annotatios: [MKAnnotation]) {
+    public func removeAnnotations(_ annotatios: [MKAnnotation]) {
         mapView.removeAnnotations(annotatios)
         print("💥", annotatios)
     }
     
-    func selectMarker(_ marker: BMAnnotation) {
+    public func selectMarker(_ marker: BMAnnotation) {
         print("💥", marker)
     }
     
-    func animateToCoordinate(_ coordinate: CLLocationCoordinate2D, withZoomLevel zoomLevel: Double) {
+    public func animateToCoordinate(_ coordinate: CLLocationCoordinate2D, withZoomLevel zoomLevel: Double) {
         print("💥", coordinate, zoomLevel)
     }
     
-    func drawAnnotations(_ annotations: [MKAnnotation]) {
+    public func drawAnnotations(_ annotations: [MKAnnotation]) {
         print("💥",annotations)
     }
     
-    func fitAnnotationsOnScreen() {
+    public func fitAnnotationsOnScreen() {
         print("💥")
     }
     
-    func setDefaultPinIcon(with icon: UIImage) {
+    public func setDefaultPinIcon(with icon: UIImage) {
         defaultPinIcon = icon
     }
     
-    func canShowCalloutView(_ isShown: Bool) {
+    public func canShowCalloutView(_ isShown: Bool) {
         canShowCallout = isShown
     }
 }
