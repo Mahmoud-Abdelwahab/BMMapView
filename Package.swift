@@ -20,8 +20,10 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "BMMapView",
-            dependencies: [],
-            resources: [.copy("BMMapView/Sources/BMMapView/MapView")]),
+            dependencies: []
+//            ,
+//            resources: [.copy("BMMapView/Sources/BMMapView/MapView")]
+        ),
         .testTarget(
             name: "BMMapViewTests",
             dependencies: ["BMMapView"]),
