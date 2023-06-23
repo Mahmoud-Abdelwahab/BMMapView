@@ -21,7 +21,7 @@ let package = Package(
         .target(
             name: "BMMapView",
             dependencies: [],
-            resources: [.copy("/Sources/BMMapView/MapView")]),
+            resources: [.copy("Sources/BMMapView/MapView")]),
         .testTarget(
             name: "BMMapViewTests",
             dependencies: ["BMMapView"]),
