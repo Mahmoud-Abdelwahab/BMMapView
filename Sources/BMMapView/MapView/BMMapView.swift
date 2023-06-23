@@ -42,6 +42,15 @@ extension BMMapView {
         loadViewFromNib()
         mapView.delegate = self
     }
+    
+    private func loadViewFromNib() {
+      
+        let nib = UINib(nibName: "BMMapView", bundle: .module)
+        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+        view.frame = bounds
+        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        addSubview(view)
+    }
 }
 
 
