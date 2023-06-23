@@ -27,3 +27,7 @@ public extension UIView {
     }
 }
 
+
+extension Bundle {
+    public static let blah = Bundle.module
+}

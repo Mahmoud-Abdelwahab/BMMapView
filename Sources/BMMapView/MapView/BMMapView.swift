@@ -44,8 +44,7 @@ extension BMMapView {
     }
     
     private func loadViewFromNib() {
-        let bundle = Bundle(for: BMMapView.self)
-        let nib = UINib(nibName: "BMMapView", bundle: bundle)
+        let nib = UINib(nibName: "BMMapView", bundle: .module)
         let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
         view.frame = bounds
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -167,3 +166,5 @@ extension BMMapView: BMMapInputType {
 final class AnnotationButton: UIButton {
     var annotation: MKPointAnnotation?
 }
+
+
