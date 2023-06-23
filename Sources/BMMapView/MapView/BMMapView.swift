@@ -14,11 +14,11 @@ public class BMMapView: UIView {
     @IBOutlet weak private var mapView: MKMapView!
     
     // MARK: - Properties
-    weak var delegate: BMMapDelegate?
+    public weak var delegate: BMMapDelegate?
     private var defaultPinIcon: UIImage?
     private var canShowCallout: Bool?
     
-    // MARK: - Init
+    // MARK: - Init 
     public  override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
