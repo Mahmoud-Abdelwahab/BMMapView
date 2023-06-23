@@ -8,8 +8,7 @@
 import UIKit
 
 public extension UIView {
-    func loadNibFromFile() {
-        let bundle = Bundle(for: type(of: self))
+    func loadNibFromFile(bundle: Bundle) {
         guard let nibName = type(of: self).description().components(separatedBy: ".").last
         else { return }
         let nib = UINib(nibName: nibName, bundle: bundle)

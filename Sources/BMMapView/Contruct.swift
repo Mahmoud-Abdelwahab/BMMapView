@@ -20,7 +20,7 @@ public protocol BMMapInputType: AnyObject {
     func addAnnotations(_ annotatios: [BMAnnotation])
     func setDefaultPinIcon(with icon: UIImage)
     func canShowCalloutView(_ isShown: Bool)
-    
+    func setBundle(bundle: Bundle)
     func removeAnnotations(_ annotatios: [MKAnnotation])
     func removeAnnotation(_ annotation: MKAnnotation)
     func selectMarker(_ marker: BMAnnotation)
