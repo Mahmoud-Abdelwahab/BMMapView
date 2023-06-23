@@ -132,7 +132,8 @@ extension BMMapView: BMMapInputType {
     public func selectMarker(_ marker: BMAnnotation) {
         print("💥", marker)
         
-        let targetCoordinate = CLLocationCoordinate2D(latitude: 51.5074, longitude: -0.1278) // The coordinate of your specific marker
+        let camera = MKMapCamera(lookingAtCenter: marker.coordinate, fromDistance: 8, pitch: 0, heading: 0)
+        mapView.setCamera(camera, animated: true)
          
         // Find the annotation view for the marker
         if let annotationView = mapView.view(for: marker.mapToMKAnnotation()) {
