@@ -120,12 +120,12 @@ extension BMMapView: BMMapInputType {
         print("💥", annotation)
     }
     
-    public func removeAnnotation(_ annotation: MKAnnotation) {
+    public func removeAnnotation(_ annotation: BMAnnotation) {
         print("💥", annotation)
     }
     
-    public func removeAnnotations(_ annotations: [MKAnnotation]) {
-        mapView.removeAnnotations(annotations)
+    public func removeAnnotations(_ annotations: [BMAnnotation]) {
+        //mapView.removeAnnotations(annotations)
         print("💥", annotations)
     }
     
@@ -133,9 +133,9 @@ extension BMMapView: BMMapInputType {
         print("💥", marker)
         
         let targetCoordinate = CLLocationCoordinate2D(latitude: 51.5074, longitude: -0.1278) // The coordinate of your specific marker
-
+         
         // Find the annotation view for the marker
-        if let annotationView = mapView.view(for: marker.coordinate as! MKAnnotation) {
+        if let annotationView = mapView.view(for: marker.mapToMKAnnotation()) {
             // Scale the annotation view
             let scale: CGFloat = 1.5 // Set the desired scale factor
             annotationView.transform = CGAffineTransform(scaleX: scale, y: scale)

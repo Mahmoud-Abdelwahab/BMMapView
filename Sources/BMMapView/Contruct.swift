@@ -40,6 +40,16 @@ public struct BMAnnotation {
     }
 }
 
+extension BMAnnotation {
+    func mapToMKAnnotation() -> MKAnnotation {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = self.coordinate
+        annotation.title = self.title
+        annotation.subtitle = self.subtitle
+        return annotation
+    }
+}
+
 extension BMMapDelegate {
     func didSelectAnnotation(_ annotation: MKAnnotation) {}
     func didDrageOnMap() {}
