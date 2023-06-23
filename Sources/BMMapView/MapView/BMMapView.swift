@@ -19,7 +19,7 @@ public class BMMapView: UIView {
     private var canShowCallout: Bool?
     
     // MARK: - Init 
-    public  override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
     }
@@ -28,6 +28,7 @@ public class BMMapView: UIView {
         super.init(coder: aDecoder)
         commonInit()
     }
+    
     
     private func commonInit() {
         setupUI()
@@ -39,14 +40,13 @@ extension BMMapView {
     
     func setupUI() {
         loadViewFromNib()
-       
         mapView.delegate = self
     }
     
     private func loadViewFromNib() {
         let bundle = Bundle(for: BMMapView.self)
         let nib = UINib(nibName: "BMMapView", bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+        let view = nib.instantiate(withOwner: self, options: nil).first as! BMMapView
         view.frame = bounds
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(view)
