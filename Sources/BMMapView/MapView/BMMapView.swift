@@ -17,7 +17,6 @@ public class BMMapView: UIView {
     public weak var delegate: BMMapDelegate?
     private var defaultPinIcon: UIImage?
     private var canShowCallout: Bool?
-    private var bundle: Bundle?
     
     // MARK: - Init 
     public  override init(frame: CGRect) {
@@ -39,7 +38,7 @@ public class BMMapView: UIView {
 extension BMMapView {
     
     func setupUI() {
-        loadNibFromFile(bundle: bundle ?? Bundle.main)
+        loadNibFromFile()
         mapView.delegate = self
     }
 }
@@ -97,10 +96,6 @@ extension BMMapView: MKMapViewDelegate {
 
 
 extension BMMapView: BMMapInputType {
-    
-    public func setBundle(bundle: Bundle) {
-        self.bundle = bundle
-    }
     
     public func addAnnotations(_ annotatios: [BMAnnotation]) {
         annotatios.forEach(addAnnotation)
