@@ -8,21 +8,11 @@
 import UIKit
 
 public extension UIView {
-    @discardableResult
-    func loadViewFromNib<T: UIView>(bundle: Bundle = .main) -> T {
-        let nibName = String(describing: type(of: self))
-        
-        guard let view = bundle.loadNibNamed(nibName, owner: self, options: nil)?.first as? T else {
-            fatalError("Failed to instantiate nib \(nibName)")
-        }
-        
-        self.addSubview(view)
-        view.frame = self.bounds
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        view.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        view.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        view.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        return view
+    func loadViewFromNib() {
+        let nib = UINib(nibName: String(describing: Self.self), bundle: .module)
+        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+        view.frame = bounds
+        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        addSubview(view)
     }
 }
