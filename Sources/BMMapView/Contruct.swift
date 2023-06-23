@@ -17,11 +17,12 @@ public protocol BMMapDelegate: AnyObject {
 public protocol BMMapInputType: AnyObject {
     func centerToLocation(_ location: CLLocation, regionRadius: CLLocationDistance)
     func addAnnotation(_ annotation: BMAnnotation)
-    func addAnnotations(_ annotatios: [BMAnnotation])
+    func addAnnotations(_ annotations: [BMAnnotation])
     func setDefaultPinIcon(with icon: UIImage)
-    func canShowCalloutView(_ isShown: Bool)
-    func removeAnnotations(_ annotatios: [MKAnnotation])
-    func removeAnnotation(_ annotation: MKAnnotation)
+    func shouldShowCalloutView(_ isShown: Bool)
+    func removeAnnotations(_ annotations: [BMAnnotation])
+    func removeAnnotation(_ annotation: BMAnnotation)
+    
     func selectMarker(_ marker: BMAnnotation)
     func animateToCoordinate(_ coordinate: CLLocationCoordinate2D, withZoomLevel zoomLevel: Double)
     func drawAnnotations(_ annotations: [MKAnnotation])

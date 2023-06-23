@@ -98,8 +98,8 @@ extension BMMapView: MKMapViewDelegate {
 
 extension BMMapView: BMMapInputType {
     
-    public func addAnnotations(_ annotatios: [BMAnnotation]) {
-        annotatios.forEach(addAnnotation)
+    public func addAnnotations(_ annotations: [BMAnnotation]) {
+        annotations.forEach(addAnnotation)
     }
     
     public func centerToLocation(_ location: CLLocation, regionRadius: CLLocationDistance) {
@@ -124,13 +124,22 @@ extension BMMapView: BMMapInputType {
         print("💥", annotation)
     }
     
-    public func removeAnnotations(_ annotatios: [MKAnnotation]) {
-        mapView.removeAnnotations(annotatios)
-        print("💥", annotatios)
+    public func removeAnnotations(_ annotations: [MKAnnotation]) {
+        mapView.removeAnnotations(annotations)
+        print("💥", annotations)
     }
     
     public func selectMarker(_ marker: BMAnnotation) {
         print("💥", marker)
+        
+        let targetCoordinate = CLLocationCoordinate2D(latitude: 51.5074, longitude: -0.1278) // The coordinate of your specific marker
+
+        // Find the annotation view for the marker
+        if let annotationView = mapView.view(for: marker.coordinate as! MKAnnotation) {
+            // Scale the annotation view
+            let scale: CGFloat = 1.5 // Set the desired scale factor
+            annotationView.transform = CGAffineTransform(scaleX: scale, y: scale)
+        }
     }
     
     public func animateToCoordinate(_ coordinate: CLLocationCoordinate2D, withZoomLevel zoomLevel: Double) {
@@ -149,7 +158,7 @@ extension BMMapView: BMMapInputType {
         defaultPinIcon = icon
     }
     
-    public func canShowCalloutView(_ isShown: Bool) {
+    public func shouldShowCalloutView(_ isShown: Bool) {
         canShowCallout = isShown
     }
 }
