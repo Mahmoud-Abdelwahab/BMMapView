@@ -139,6 +139,8 @@ extension BMMapView: BMMapInputType {
             // Scale the annotation view
             let scale: CGFloat = 1.5 // Set the desired scale factor
             annotationView.transform = CGAffineTransform(scaleX: scale, y: scale)
+        } else {
+          debugPrint("🧨: = Marker Not Found On Map")
         }
     }
     
