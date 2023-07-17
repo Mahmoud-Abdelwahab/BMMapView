@@ -2,44 +2,35 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Map view configurations" minToolsVersion="14.0"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BMMapView" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BMMapView" customModule="MapDemo" customModuleProvider="target">
             <connections>
                 <outlet property="mapView" destination="eXk-Of-4Cs" id="6IU-mM-oYu"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
+        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="393" height="570"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eXk-Of-4Cs">
-                    <rect key="frame" x="0.0" y="59" width="393" height="477"/>
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="570"/>
                     <standardMapConfiguration key="preferredConfiguration"/>
                 </mapView>
             </subviews>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" systemColor="systemMintColor"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="eXk-Of-4Cs" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="5eA-CR-Io9"/>
-                <constraint firstItem="eXk-Of-4Cs" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="iLX-ec-e43"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="eXk-Of-4Cs" secondAttribute="trailing" id="nS5-A6-Emr"/>
-                <constraint firstItem="eXk-Of-4Cs" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="si9-Bt-gAd"/>
+                <constraint firstItem="eXk-Of-4Cs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="2ba-1M-mXm"/>
+                <constraint firstItem="eXk-Of-4Cs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Nnz-a0-1y3"/>
+                <constraint firstAttribute="bottom" secondItem="eXk-Of-4Cs" secondAttribute="bottom" id="W4E-MO-QqL"/>
+                <constraint firstAttribute="trailing" secondItem="eXk-Of-4Cs" secondAttribute="trailing" id="hUg-S1-hLy"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-121.37404580152672" y="-331.69014084507046"/>
         </view>
     </objects>
-    <resources>
-        <systemColor name="systemMintColor">
-            <color red="0.0" green="0.7803921568627451" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-    </resources>
 </document>

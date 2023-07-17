@@ -51,19 +51,19 @@ extension BMMapView {
 
 
 extension BMMapView: MKMapViewDelegate {
-    
+   
     // MARK: - MKMapViewDelegate
     
     public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         guard let annotation = view.annotation else { return }
         
-        let bmAnnotation = BMAnnotation(
-            coordinate: annotation.coordinate,
-            title: annotation.title ?? nil,
-            subtitle: annotation.subtitle ?? nil)
-        delegate?.didSelectAnnotation(bmAnnotation)
-        
-        
+            let bmAnnotation = BMAnnotation(
+                coordinate: annotation.coordinate,
+                title: annotation.title ?? nil,
+                subtitle: annotation.subtitle ?? nil)
+            delegate?.didSelectAnnotation(bmAnnotation)
+    
+       
     }
     
     public func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
@@ -81,7 +81,7 @@ extension BMMapView: MKMapViewDelegate {
         if let defaultPinIcon = defaultPinIcon {
             annotationView.image = defaultPinIcon
         } else {
-            annotationView.image = UIImage(systemName: "mappin.and.ellipse")
+            annotationView.image = UIImage(systemName: "mappin.and.ellipse")?.withTintColor(.red, renderingMode: .alwaysTemplate)
         }
         
         let button = AnnotationButton(type: .detailDisclosure)
@@ -107,9 +107,9 @@ extension BMMapView: BMMapInputType {
         removeAnnotations([annotation])
         addAnnotations([annotation])
         centerToAnnotation(annotation,
-                           regionRadius: regionRadius)
+                                   regionRadius: regionRadius)
     }
-    
+
     public func addAnnotations(_ annotations: [BMAnnotation]) {
         mapView.clearsContextBeforeDrawing = true
         annotations.forEach(addAnnotation)
@@ -146,8 +146,8 @@ extension BMMapView: BMMapInputType {
             if #available(iOS 14.0, *) {
                 lastAnnotationView.zPriority = .min
             }
-            //            lastAnnotationView.layer.zPosition = 0
-            //            lastAnnotationView.layer.anchorPointZ = 0
+//            lastAnnotationView.layer.zPosition = 0
+//            lastAnnotationView.layer.anchorPointZ = 0
             UIView.animate(withDuration: 0.1) {
                 lastAnnotationView.transform = CGAffineTransform.identity
             }
@@ -156,11 +156,11 @@ extension BMMapView: BMMapInputType {
     
     public func scaleAnnotation(_ annotation: BMAnnotation, selectedScale: CGFloat = 1.5) {
         let selectedAnnotation =  mapView.annotations.last(where: { $0.coordinate == annotation.coordinate })
-        
+     
         if let selectedAnnotation = selectedAnnotation, let selectedAnnotationView = mapView.view(for: selectedAnnotation) , selectedAnnotationView !=  lastSelectedAnnotationView {
             resetAnnotationScaling()
             let transform = CGAffineTransform(scaleX: selectedScale, y: selectedScale)
-            
+        
             UIView.animate(withDuration: 0.2) {
                 selectedAnnotationView.transform = transform
             }
@@ -168,10 +168,10 @@ extension BMMapView: BMMapInputType {
             if #available(iOS 14.0, *) {
                 selectedAnnotationView.zPriority = .max
             }
-            //            lastSelectedAnnotationView?.layer.zPosition = 1
+//            lastSelectedAnnotationView?.layer.zPosition = 1
             
             lastSelectedAnnotationView = selectedAnnotationView
-            
+           
         } else {
             print("💥 -  can't find location")
         }
