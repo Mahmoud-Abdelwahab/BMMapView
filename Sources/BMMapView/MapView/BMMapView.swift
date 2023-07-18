@@ -146,9 +146,9 @@ extension BMMapView: BMMapInputType {
     
     public func resetAnnotationScaling() {
         if let lastAnnotationView = lastSelectedAnnotationView {
-//            if #available(iOS 14.0, *) {
-//                lastAnnotationView.zPriority = .min
-//            }
+            if #available(iOS 14.0, *) {
+                lastAnnotationView.zPriority = .min
+            }
             UIView.animate(withDuration: 0.1) {
                 lastAnnotationView.transform = CGAffineTransform.identity
             }
@@ -164,9 +164,9 @@ extension BMMapView: BMMapInputType {
             UIView.animate(withDuration: 0.2) {
                 selectedAnnotationView.transform = transform
             }
-//            if #available(iOS 14.0, *) {
-//                selectedAnnotationView.zPriority = .max
-//            }
+            if #available(iOS 14.0, *) {
+                selectedAnnotationView.zPriority = .max
+            }
             lastSelectedAnnotationView = selectedAnnotationView
         } else {
             debugPrint("💥 -  Can't find annotation")
