@@ -9,6 +9,9 @@ import MapKit
 
 public protocol BMMapDelegate: AnyObject {
     
+    /// Delegate method to receive general actions on map
+    var delegate: BMMapDelegate? { set get }
+    
     /// This delegate func fires When user click on any marker
     /// - Parameter annotation: The selected annotation
     func didSelectAnnotation(_ annotation: BMAnnotation)
