@@ -51,19 +51,16 @@ extension BMMapView {
 
 
 extension BMMapView: MKMapViewDelegate {
-   
+    
     // MARK: - MKMapViewDelegate
     
     public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         guard let annotation = view.annotation else { return }
-        
-            let bmAnnotation = BMAnnotation(
-                coordinate: annotation.coordinate,
-                title: annotation.title ?? nil,
-                subtitle: annotation.subtitle ?? nil)
-            delegate?.didSelectAnnotation(bmAnnotation)
-    
-       
+        let bmAnnotation = BMAnnotation(
+            coordinate: annotation.coordinate,
+            title: annotation.title ?? nil,
+            subtitle: annotation.subtitle ?? nil)
+        delegate?.didSelectAnnotation(bmAnnotation)
     }
     
     public func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
@@ -73,7 +70,6 @@ extension BMMapView: MKMapViewDelegate {
     public func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
         annotationView.isUserInteractionEnabled = true
-        
         if let canShowCallout = canShowCallout {
             annotationView.canShowCallout = canShowCallout
         }
@@ -83,7 +79,6 @@ extension BMMapView: MKMapViewDelegate {
         } else {
             annotationView.image = UIImage(systemName: "mappin.and.ellipse")?.withTintColor(.red, renderingMode: .alwaysTemplate)
         }
-        
         let button = AnnotationButton(type: .detailDisclosure)
         button.addTarget(self, action: #selector(pinAction(_:)), for: .touchUpInside)
         if let pointAnnotation = annotation as? MKPointAnnotation {
@@ -103,25 +98,33 @@ extension BMMapView: MKMapViewDelegate {
 
 
 extension BMMapView: BMMapInputType {
-    public func selectAnnotation(_ annotation: BMAnnotation, regionRadius: Double) {
+    
+    public func selectAnnotation(_ annotation: BMAnnotation, regionRadius: Double?) {
+        var radius = 50_000.0
         removeAnnotations([annotation])
         addAnnotations([annotation])
+        if let regionRadius = regionRadius {
+            radius = regionRadius
+        }
         centerToAnnotation(annotation,
-                                   regionRadius: regionRadius)
+                           regionRadius: radius)
     }
-
+    
     public func addAnnotations(_ annotations: [BMAnnotation]) {
         mapView.clearsContextBeforeDrawing = true
         annotations.forEach(addAnnotation)
     }
     
-    public func centerToAnnotation(_ annotation: BMAnnotation, regionRadius: Double) {
+    public func centerToAnnotation(_ annotation: BMAnnotation, regionRadius: Double?) {
+        var radius = 50_000.0
+        if let regionRadius = regionRadius {
+            radius = regionRadius
+        }
         let coordinateRegion = MKCoordinateRegion(
             center: annotation.coordinate,
-            latitudinalMeters: regionRadius,
-            longitudinalMeters: regionRadius)
+            latitudinalMeters: radius,
+            longitudinalMeters: radius)
         mapView.setRegion(coordinateRegion, animated: true)
-        print("💥", annotation, regionRadius)
     }
     
     public func removeAnnotations(_ annotations: [BMAnnotation]) {
@@ -146,8 +149,6 @@ extension BMMapView: BMMapInputType {
             if #available(iOS 14.0, *) {
                 lastAnnotationView.zPriority = .min
             }
-//            lastAnnotationView.layer.zPosition = 0
-//            lastAnnotationView.layer.anchorPointZ = 0
             UIView.animate(withDuration: 0.1) {
                 lastAnnotationView.transform = CGAffineTransform.identity
             }
@@ -156,28 +157,23 @@ extension BMMapView: BMMapInputType {
     
     public func scaleAnnotation(_ annotation: BMAnnotation, selectedScale: CGFloat = 1.5) {
         let selectedAnnotation =  mapView.annotations.last(where: { $0.coordinate == annotation.coordinate })
-     
+        
         if let selectedAnnotation = selectedAnnotation, let selectedAnnotationView = mapView.view(for: selectedAnnotation) , selectedAnnotationView !=  lastSelectedAnnotationView {
             resetAnnotationScaling()
             let transform = CGAffineTransform(scaleX: selectedScale, y: selectedScale)
-        
             UIView.animate(withDuration: 0.2) {
                 selectedAnnotationView.transform = transform
             }
-            
             if #available(iOS 14.0, *) {
                 selectedAnnotationView.zPriority = .max
             }
-//            lastSelectedAnnotationView?.layer.zPosition = 1
-            
             lastSelectedAnnotationView = selectedAnnotationView
-           
         } else {
-            print("💥 -  can't find location")
+            debugPrint("💥 -  Can't find annotation")
         }
     }
     
-    public func fitAnnotationsInTheScreen(_ annotations: [BMAnnotation],_ edgePadding: UIEdgeInsets = UIEdgeInsets(top: 50, left: 16, bottom: 50, right: 16)) {
+    public func fitAnnotationsInTheScreen(_ annotations: [BMAnnotation], edgePadding: UIEdgeInsets = UIEdgeInsets(top: 50, left: 16, bottom: 50, right: 16)) {
         addAnnotations(annotations)
         var zoomRect = MKMapRect.null
         for branch in annotations {

@@ -7,11 +7,19 @@
 
 import MapKit
 
-
 public protocol BMMapDelegate: AnyObject {
     
+    /// This delegate func fires When user click on any marker
+    /// - Parameter annotation: The selected annotation
     func didSelectAnnotation(_ annotation: BMAnnotation)
+    
+    
+    /// This delegate func used when user move or drag map to any direction
     func didDrageOnMap()
+    
+    
+    /// This delegate func when the user click on the callout view
+    /// - Parameter annotation: this is the selected annotation which related to the selected callout view
     func didTapOnCalloutView(_ annotation: BMAnnotation)
 }
 
@@ -20,7 +28,7 @@ public protocol BMMapInputType: AnyObject {
     /// - Parameters:
     ///   - annotations: Location to center the map to
     ///   - regionRadius: Zoom level
-    func centerToAnnotation(_ annotations: BMAnnotation, regionRadius: Double)
+    func centerToAnnotation(_ annotations: BMAnnotation, regionRadius: Double?)
     
     /// Change default marker icon
     /// - Parameter icon: marker icon
@@ -38,7 +46,7 @@ public protocol BMMapInputType: AnyObject {
     /// - Parameters:
     ///   - annotation: The selected annotation
     ///   - regionRadius: Zoom level
-    func selectAnnotation(_ annotation: BMAnnotation, regionRadius: Double)
+    func selectAnnotation(_ annotation: BMAnnotation, regionRadius: Double?)
     
     /// Remove annotation from make
     /// - Parameter annotations: List of annotations to be removed
@@ -48,7 +56,7 @@ public protocol BMMapInputType: AnyObject {
     /// - Parameters:
     ///   - annotations: List of annotations to be fitted on the entire screen
     ///   - edgePadding: Setting Edge insets to dynamically set  canvas padding for the annotations it takes default
-    func fitAnnotationsInTheScreen(_ annotations: [BMAnnotation],_ edgePadding: UIEdgeInsets)
+    func fitAnnotationsInTheScreen(_ annotations: [BMAnnotation], edgePadding: UIEdgeInsets)
     
     /// Resetting scaled Annotations
     func resetAnnotationScaling()
@@ -68,35 +76,21 @@ public protocol BMMapInputType: AnyObject {
     func animateToAnnotation(_ annotation: BMAnnotation, zoomLevel: Double?, animated: Bool)
 }
 
-extension BMMapInputType {
-    
-}
-
-public class BMAnnotation: NSObject, MKAnnotation {
-    public var coordinate: CLLocationCoordinate2D
-    public var title: String?
-    public var subtitle: String?
-    public init(coordinate: CLLocationCoordinate2D, title: String? = nil, subtitle: String? = nil) {
-        self.coordinate = coordinate
-        self.title = title
-        self.subtitle = subtitle
-    }
-}
-
-extension BMAnnotation {
-    func mapToMKAnnotation() -> MKAnnotation {
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = self.coordinate
-        annotation.title = self.title
-        annotation.subtitle = self.subtitle
-        return annotation
-    }
-}
-
-extension BMMapDelegate {
-    func didSelectAnnotation(_ annotation: MKAnnotation) {}
+extension BMMapDelegate{
     func didDrageOnMap() {}
+    func didTapOnCalloutView(_ annotation: BMAnnotation) {}
 }
 
+extension BMMapInputType {
+    func fitAnnotationsInTheScreen(_ annotations: [BMAnnotation], edgePadding: UIEdgeInsets = UIEdgeInsets(top: 50, left: 16, bottom: 50, right: 16)) {
+       fitAnnotationsInTheScreen(annotations, edgePadding: edgePadding)
+    }
+    
+    func scaleAnnotation(_ annotation: BMAnnotation, selectedScale: CGFloat = 1.5) {
+        scaleAnnotation(annotation, selectedScale: selectedScale)
+    }
 
-
+    func animateToAnnotation(_ annotation: BMAnnotation, zoomLevel: Double? = nil, animated: Bool = true) {
+        animateToAnnotation(annotation, zoomLevel: zoomLevel, animated: animated)
+    }
+}
