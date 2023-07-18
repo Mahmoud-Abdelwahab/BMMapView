@@ -48,7 +48,7 @@ public protocol BMMapInputType: AnyObject {
     /// - Parameters:
     ///   - annotations: List of annotations to be fitted on the entire screen
     ///   - edgePadding: Setting Edge insets to dynamically set  canvas padding for the annotations it takes default
-    func fitAnnotationsInTheScreen(_ annotations: [BMAnnotation], edgePadding: UIEdgeInsets)
+    func fitAnnotationsInTheScreen(_ annotations: [BMAnnotation],_ edgePadding: UIEdgeInsets)
     
     /// Resetting scaled Annotations
     func resetAnnotationScaling()
@@ -66,6 +66,10 @@ public protocol BMMapInputType: AnyObject {
     ///   - zoomLevel: zoom level
     ///   - animated: move with animation
     func animateToAnnotation(_ annotation: BMAnnotation, zoomLevel: Double?, animated: Bool)
+}
+
+extension BMMapInputType {
+    
 }
 
 public class BMAnnotation: NSObject, MKAnnotation {

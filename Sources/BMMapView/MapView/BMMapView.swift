@@ -177,7 +177,7 @@ extension BMMapView: BMMapInputType {
         }
     }
     
-    public func fitAnnotationsInTheScreen(_ annotations: [BMAnnotation], edgePadding: UIEdgeInsets = UIEdgeInsets(top: 50, left: 16, bottom: 50, right: 16)) {
+    public func fitAnnotationsInTheScreen(_ annotations: [BMAnnotation],_ edgePadding: UIEdgeInsets = UIEdgeInsets(top: 50, left: 16, bottom: 50, right: 16)) {
         addAnnotations(annotations)
         var zoomRect = MKMapRect.null
         for branch in annotations {
