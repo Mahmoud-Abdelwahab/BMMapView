@@ -76,12 +76,12 @@ public protocol BMMapInputType: AnyObject {
     func animateToAnnotation(_ annotation: BMAnnotation, zoomLevel: Double?, animated: Bool)
 }
 
-extension BMMapDelegate{
+public extension BMMapDelegate{
     func didDrageOnMap() {}
     func didTapOnCalloutView(_ annotation: BMAnnotation) {}
 }
 
-extension BMMapInputType {
+public extension BMMapInputType {
     func fitAnnotationsInTheScreen(_ annotations: [BMAnnotation], edgePadding: UIEdgeInsets = UIEdgeInsets(top: 50, left: 16, bottom: 50, right: 16)) {
        fitAnnotationsInTheScreen(annotations, edgePadding: edgePadding)
     }
