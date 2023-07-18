@@ -9,9 +9,6 @@ import MapKit
 
 public protocol BMMapDelegate: AnyObject {
     
-    /// Delegate method to receive general actions on map
-    var delegate: BMMapDelegate? { set get }
-    
     /// This delegate func fires When user click on any marker
     /// - Parameter annotation: The selected annotation
     func didSelectAnnotation(_ annotation: BMAnnotation)
@@ -27,6 +24,9 @@ public protocol BMMapDelegate: AnyObject {
 }
 
 public protocol BMMapInputType: AnyObject {
+    /// Delegate method to receive general actions on map
+    var delegate: BMMapDelegate? { set get }
+    
     /// Center Map to specific location
     /// - Parameters:
     ///   - annotations: Location to center the map to
