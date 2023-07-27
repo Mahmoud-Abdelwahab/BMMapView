@@ -20,6 +20,7 @@ public class BMMapView: UIView {
     private var lastSelectedAnnotationView: MKAnnotationView?
     private var lastScaledAnnotation: BMAnnotation?
     private let reuseIdentifier = "BMMapViewCell"
+    private let REGION_RADIUS = 50_000.0
     public var zoomLevel: Double? {
         getZoomLevel()
     }
@@ -54,7 +55,8 @@ extension BMMapView: MKMapViewDelegate {
     
     // MARK: - MKMapViewDelegate
     
-    public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+    public func mapView(_ mapView: MKMapView,
+                        didSelect view: MKAnnotationView) {
         guard let annotation = view.annotation else { return }
         let bmAnnotation = BMAnnotation(
             coordinate: annotation.coordinate,
@@ -63,11 +65,13 @@ extension BMMapView: MKMapViewDelegate {
         delegate?.didSelectAnnotation(bmAnnotation)
     }
     
-    public func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+    public func mapView(_ mapView: MKMapView,
+                        regionWillChangeAnimated animated: Bool) {
         delegate?.didDrageOnMap()
     }
     
-    public func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+    public func mapView(_ mapView: MKMapView,
+                        viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
         annotationView.isUserInteractionEnabled = true
         if let canShowCallout = canShowCallout {
@@ -99,8 +103,9 @@ extension BMMapView: MKMapViewDelegate {
 
 extension BMMapView: BMMapInputType {
     
-    public func selectAnnotation(_ annotation: BMAnnotation, regionRadius: Double?) {
-        var radius = 50_000.0
+    public func selectAnnotation(_ annotation: BMAnnotation,
+                                 regionRadius: Double?) {
+        var radius = REGION_RADIUS
         removeAnnotations([annotation])
         addAnnotations([annotation])
         if let regionRadius = regionRadius {
@@ -115,8 +120,9 @@ extension BMMapView: BMMapInputType {
         annotations.forEach(addAnnotation)
     }
     
-    public func centerToAnnotation(_ annotation: BMAnnotation, regionRadius: Double?) {
-        var radius = 50_000.0
+    public func centerToAnnotation(_ annotation: BMAnnotation,
+                                   regionRadius: Double?) {
+        var radius = REGION_RADIUS
         if let regionRadius = regionRadius {
             radius = regionRadius
         }
@@ -131,15 +137,17 @@ extension BMMapView: BMMapInputType {
         mapView.removeAnnotations(mapView.annotations)
     }
     
-    //TODO: - separate the logic of animating the camera and scaling the annotation
-    public func animateToAnnotation(_ annotation: BMAnnotation, zoomLevel: Double? = nil, animated: Bool = true) {
+    public func animateToAnnotation(_ annotation: BMAnnotation,
+                                    zoomLevel: Double? = nil,
+                                    animated: Bool = true) {
         let camera: MKMapCamera
         if let zoomLevel = zoomLevel {
             let currentZoom = getZoomLevel()
             let altitude = pow(2, currentZoom - zoomLevel) * (Double(mapView.bounds.size.width) / 2)
             camera = MKMapCamera(lookingAtCenter: annotation.coordinate, fromDistance: altitude, pitch: 0, heading: 0)
         } else {
-            camera = MKMapCamera(lookingAtCenter: annotation.coordinate, fromDistance: mapView.camera.altitude, pitch: 0, heading: 0)
+            camera = MKMapCamera(lookingAtCenter: annotation.coordinate,
+                                 fromDistance: mapView.camera.altitude, pitch: 0, heading: 0)
         }
         mapView.setCamera(camera, animated: animated)
     }
@@ -155,7 +163,8 @@ extension BMMapView: BMMapInputType {
         }
     }
     
-    public func scaleAnnotation(_ annotation: BMAnnotation, selectedScale: CGFloat = 1.5) {
+    public func scaleAnnotation(_ annotation: BMAnnotation,
+                                selectedScale: CGFloat = 1.5) {
         let selectedAnnotation =  mapView.annotations.last(where: { $0.coordinate == annotation.coordinate })
         
         if let selectedAnnotation = selectedAnnotation, let selectedAnnotationView = mapView.view(for: selectedAnnotation) , selectedAnnotationView !=  lastSelectedAnnotationView {
@@ -173,7 +182,10 @@ extension BMMapView: BMMapInputType {
         }
     }
     
-    public func fitAnnotationsInTheScreen(_ annotations: [BMAnnotation], edgePadding: UIEdgeInsets = UIEdgeInsets(top: 50, left: 16, bottom: 50, right: 16)) {
+    public func fitAnnotationsInTheScreen(_ annotations: [BMAnnotation],
+                                          edgePadding: UIEdgeInsets = UIEdgeInsets(top: 50,
+                                                                                   left: 16,
+                                                                                   bottom: 50, right: 16)) {
         addAnnotations(annotations)
         var zoomRect = MKMapRect.null
         for branch in annotations {
@@ -215,5 +227,3 @@ private extension BMMapView {
 final class AnnotationButton: UIButton {
     var annotation: MKPointAnnotation?
 }
-
-
