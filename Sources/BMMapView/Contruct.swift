@@ -5,7 +5,7 @@
 //  Created by Mahmoud Abdulwahab on 29/06/2023.
 //
 
-import MapKit
+import UIKit
 
 public protocol BMMapDelegate: AnyObject {
     

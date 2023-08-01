@@ -23,7 +23,7 @@ extension BMMapView: BMMapInputType {
     
     public func addAnnotations(_ annotations: [BMAnnotation]) {
         mapView.clearsContextBeforeDrawing = true
-        mapView.addAnnotations(annotations.map { $0.mapToMKAnnotation() })
+        mapView.addAnnotations(annotations)
     }
     
     public func centerToAnnotation(_ annotation: BMAnnotation,

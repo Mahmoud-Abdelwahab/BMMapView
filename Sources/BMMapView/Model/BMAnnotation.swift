@@ -7,7 +7,13 @@
 
 import MapKit
 
-public class BMAnnotation: NSObject, MKAnnotation {
+ protocol BMAnnotationType : NSObjectProtocol {
+     var coordinate: CLLocationCoordinate2D { get }
+     var title: String? { get }
+     var subtitle: String? { get }
+}
+
+public class BMAnnotation: NSObject, BMAnnotationType {
     public var coordinate: CLLocationCoordinate2D
     public var title: String?
     public var subtitle: String?
@@ -18,12 +24,5 @@ public class BMAnnotation: NSObject, MKAnnotation {
     }
 }
 
-extension BMAnnotation {
-    func mapToMKAnnotation() -> MKAnnotation {
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = self.coordinate
-        annotation.title = self.title
-        annotation.subtitle = self.subtitle
-        return annotation
-    }
-}
+
+extension BMAnnotation: MKAnnotation { }
