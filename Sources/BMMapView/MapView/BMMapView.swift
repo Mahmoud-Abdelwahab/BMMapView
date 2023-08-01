@@ -117,7 +117,7 @@ extension BMMapView: BMMapInputType {
     
     public func addAnnotations(_ annotations: [BMAnnotation]) {
         mapView.clearsContextBeforeDrawing = true
-        annotations.forEach(addAnnotation)
+        mapView.addAnnotations(annotations.map { $0.mapToMKAnnotation() })
     }
     
     public func centerToAnnotation(_ annotation: BMAnnotation,
@@ -134,7 +134,7 @@ extension BMMapView: BMMapInputType {
     }
     
     public func removeAnnotations(_ annotations: [BMAnnotation]) {
-        mapView.removeAnnotations(mapView.annotations)
+        mapView.removeAnnotations(annotations)
     }
     
     public func animateToAnnotation(_ annotation: BMAnnotation,
