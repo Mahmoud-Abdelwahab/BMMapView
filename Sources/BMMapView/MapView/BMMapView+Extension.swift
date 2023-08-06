@@ -7,7 +7,7 @@
 
 import MapKit
 
-extension BMMapView: MKMapViewDelegate {
+extension BMAppleMapView: MKMapViewDelegate {
     
     // MARK: - MKMapViewDelegate
     

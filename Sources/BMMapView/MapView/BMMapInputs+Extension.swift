@@ -7,7 +7,7 @@
 
 import MapKit
 
-extension BMMapView: BMMapInputType {
+extension BMAppleMapView: BMMapInputType {
     
     public func selectAnnotation(_ annotation: BMAnnotation,
                                  regionRadius: Double?) {

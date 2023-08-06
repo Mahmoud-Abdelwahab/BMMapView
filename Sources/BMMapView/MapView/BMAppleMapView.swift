@@ -1,5 +1,5 @@
 //
-//  BMMapView.swift
+//  BMAppleMapView.swift
 //  AppleMapFramework
 //
 //  Created by Mahmoud Abdulwahab on 22/06/2023.
@@ -8,7 +8,7 @@
 import UIKit
 import MapKit
 
-public class BMMapView: UIView {
+public class BMAppleMapView: UIView {
     
     // MARK: - Outlets
     @IBOutlet weak var mapView: MKMapView!
@@ -41,7 +41,7 @@ public class BMMapView: UIView {
 }
 
 // MARK: - Configurations
-extension BMMapView {
+extension BMAppleMapView {
     func setupUI() {
         loadViewFromNib()
         mapView.delegate = self
@@ -49,7 +49,7 @@ extension BMMapView {
 }
 
 // MARK: - Private Handlers
- extension BMMapView {
+ extension BMAppleMapView {
     
     func addAnnotation(_ annotation: BMAnnotation) {
         let annotations = MKPointAnnotation()
