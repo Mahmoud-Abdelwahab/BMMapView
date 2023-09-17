@@ -23,6 +23,7 @@ extension BMAppleMapView: MKMapViewDelegate {
     
     public func mapView(_ mapView: MKMapView,
                         regionWillChangeAnimated animated: Bool) {
+        centerOfCameraPosition = mapView.centerCoordinate
         delegate?.didDrageOnMap()
     }
     
