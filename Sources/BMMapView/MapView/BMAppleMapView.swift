@@ -39,6 +39,7 @@ public class BMAppleMapView: UIView {
     
     private func commonInit() {
         setupUI()
+        mapView.showsUserLocation = true
     }
 }
 
