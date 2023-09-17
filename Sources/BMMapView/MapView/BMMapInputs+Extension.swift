@@ -94,6 +94,7 @@ extension BMAppleMapView: BMMapInputType {
                                                                                    bottom: 50, right: 16)) {
         addAnnotations(annotations)
         var zoomRect = MKMapRect.null
+        centerOfCameraPosition = mapView.centerCoordinate
         for branch in annotations {
             let annotationPoint = MKMapPoint(branch.coordinate)
             let pointRect = MKMapRect(x: annotationPoint.x, y: annotationPoint.y, width: 0.1, height: 0.1)

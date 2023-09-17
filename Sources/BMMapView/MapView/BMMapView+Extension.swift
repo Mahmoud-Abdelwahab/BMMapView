@@ -54,5 +54,9 @@ extension BMAppleMapView: MKMapViewDelegate {
         let annotation = BMAnnotation(coordinate: annotationPointModel.coordinate, title: annotationPointModel.title, subtitle: annotationPointModel.subtitle)
         delegate?.didTapOnCalloutView(annotation)
     }
+    
+    public func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        centerOfCameraPosition = mapView.centerCoordinate
+    }
 }
 

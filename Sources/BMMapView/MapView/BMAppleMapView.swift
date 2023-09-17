@@ -1,5 +1,5 @@
 //
-//  BMAppleMapView.swift
+//  BMMapView.swift
 //  AppleMapFramework
 //
 //  Created by Mahmoud Abdulwahab on 22/06/2023.
@@ -15,6 +15,8 @@ public class BMAppleMapView: UIView {
     
     // MARK: - Properties
     public weak var delegate: BMMapDelegate?
+    public var centerOfCameraPosition: CLLocationCoordinate2D?
+    
     var defaultPinIcon: UIImage?
     var canShowCallout: Bool?
     var lastSelectedAnnotationView: MKAnnotationView?

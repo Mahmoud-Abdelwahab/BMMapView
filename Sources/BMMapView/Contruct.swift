@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 public protocol BMMapDelegate: AnyObject {
     
@@ -24,8 +25,11 @@ public protocol BMMapDelegate: AnyObject {
 }
 
 public protocol BMMapInputType: AnyObject {
-    /// Delegate method to receive general actions on map
+    ///  Property to receive general actions on map
     var delegate: BMMapDelegate? { set get }
+    
+    /// Use the 'Property' variable to get the current center coordinate of the map.
+    var centerOfCameraPosition: CLLocationCoordinate2D? { get }
     
     /// Center Map to specific location
     /// - Parameters:
