@@ -81,9 +81,7 @@ extension BMAppleMapView: BMMapInputType {
     public func scaleAnnotation(_ annotation: BMAnnotation,
                                 selectedScale: CGFloat = 1.5) {
         let selectedAnnotation =  mapView.annotations.last(where: { $0.coordinate == annotation.coordinate })
-           
-        centerToAnnotation(annotation, regionRadius: REGION_RADIUS)
-        
+                
         if let selectedAnnotation = selectedAnnotation, let selectedAnnotationView = mapView.view(for: selectedAnnotation) , selectedAnnotationView !=  lastSelectedAnnotationView {
             resetAnnotationScaling()
             let transform = CGAffineTransform(scaleX: selectedScale, y: selectedScale)
