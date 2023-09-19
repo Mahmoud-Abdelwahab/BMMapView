@@ -31,6 +31,9 @@ public protocol BMMapInputType: AnyObject {
     /// Use the 'Property' variable to get the current center coordinate of the map.
     var centerOfCameraPosition: CLLocationCoordinate2D? { get }
     
+    /// Use the 'Property' variable to get map zoom level
+    var zoomLevel: Double?  { get }
+    
     /// Center Map to specific location
     /// - Parameters:
     ///   - annotations: Location to center the map to
@@ -81,6 +84,11 @@ public protocol BMMapInputType: AnyObject {
     ///   - zoomLevel: zoom level
     ///   - animated: move with animation
     func animateToAnnotation(_ annotation: BMAnnotation, zoomLevel: Double?, animated: Bool)
+    
+    /// Show default user location on apple map
+    /// - Parameters:
+    ///   - isShown: flag to show or hide
+    func showsUserLocation(isShown: Bool)
 }
 
 public extension BMMapDelegate{

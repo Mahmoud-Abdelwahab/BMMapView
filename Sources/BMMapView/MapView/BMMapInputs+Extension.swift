@@ -9,6 +9,14 @@ import MapKit
 
 extension BMAppleMapView: BMMapInputType {
     
+    public var zoomLevel: Double? {
+        getZoomLevel()
+    }
+    
+    public func showsUserLocation(isShown: Bool) {
+        mapView.showsUserLocation = isShown
+    }
+    
     public func selectAnnotation(_ annotation: BMAnnotation,
                                  regionRadius: Double?) {
         var radius = REGION_RADIUS
@@ -23,6 +31,7 @@ extension BMAppleMapView: BMMapInputType {
     
     public func addAnnotations(_ annotations: [BMAnnotation]) {
         mapView.clearsContextBeforeDrawing = true
+        mapView.removeAnnotations(mapView.annotations)
         mapView.addAnnotations(annotations)
     }
     
@@ -72,6 +81,8 @@ extension BMAppleMapView: BMMapInputType {
     public func scaleAnnotation(_ annotation: BMAnnotation,
                                 selectedScale: CGFloat = 1.5) {
         let selectedAnnotation =  mapView.annotations.last(where: { $0.coordinate == annotation.coordinate })
+           
+        centerToAnnotation(annotation, regionRadius: REGION_RADIUS)
         
         if let selectedAnnotation = selectedAnnotation, let selectedAnnotationView = mapView.view(for: selectedAnnotation) , selectedAnnotationView !=  lastSelectedAnnotationView {
             resetAnnotationScaling()
@@ -91,7 +102,8 @@ extension BMAppleMapView: BMMapInputType {
     public func fitAnnotationsInTheScreen(_ annotations: [BMAnnotation],
                                           edgePadding: UIEdgeInsets = UIEdgeInsets(top: 50,
                                                                                    left: 16,
-                                                                                   bottom: 50, right: 16)) {
+                                                                                   bottom: 50,
+                                                                                   right: 16)) {
         addAnnotations(annotations)
         var zoomRect = MKMapRect.null
         centerOfCameraPosition = mapView.centerCoordinate

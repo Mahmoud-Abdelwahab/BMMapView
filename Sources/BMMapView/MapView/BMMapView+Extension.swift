@@ -55,5 +55,7 @@ extension BMAppleMapView: MKMapViewDelegate {
         let annotation = BMAnnotation(coordinate: annotationPointModel.coordinate, title: annotationPointModel.title, subtitle: annotationPointModel.subtitle)
         delegate?.didTapOnCalloutView(annotation)
     }
+    
+    
 }
 

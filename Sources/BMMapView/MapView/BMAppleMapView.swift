@@ -23,9 +23,7 @@ public class BMAppleMapView: UIView {
     var lastScaledAnnotation: BMAnnotation?
     let reuseIdentifier = "BMMapViewCell"
     let REGION_RADIUS = 50_000.0
-    public var zoomLevel: Double? {
-        getZoomLevel()
-    }
+  
     // MARK: - Init
     public override init(frame: CGRect) {
         super.init(frame: frame)
