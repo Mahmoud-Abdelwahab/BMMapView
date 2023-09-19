@@ -16,7 +16,7 @@ public class BMAppleMapView: UIView {
     // MARK: - Properties
     public weak var delegate: BMMapDelegate?
     public var centerOfCameraPosition: CLLocationCoordinate2D?
-    
+    var autoScaling = false
     var defaultPinIcon: UIImage?
     var canShowCallout: Bool?
     var lastSelectedAnnotationView: MKAnnotationView?

@@ -50,12 +50,12 @@ extension BMAppleMapView: MKMapViewDelegate {
     }
     
     public func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        print("regionDidChangeAnimated ❤️")
+        if autoScaling {
+            print("regionDidChangeAnimated ❤️")
+            autoScaling = false
+        }
     }
-    
-    public func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
-        print("mapViewDidChangeVisibleRegion💥 ")
-    }
+
     
     @objc private func pinAction(_ pinButton: AnnotationButton) {
         guard let annotationPointModel = pinButton.annotation else { return }
