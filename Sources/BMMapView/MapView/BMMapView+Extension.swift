@@ -49,6 +49,13 @@ extension BMAppleMapView: MKMapViewDelegate {
         return annotationView
     }
     
+    public func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        print("regionDidChangeAnimated ❤️")
+    }
+    
+    public func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
+        print("mapViewDidChangeVisibleRegion💥 ")
+    }
     
     @objc private func pinAction(_ pinButton: AnnotationButton) {
         guard let annotationPointModel = pinButton.annotation else { return }
