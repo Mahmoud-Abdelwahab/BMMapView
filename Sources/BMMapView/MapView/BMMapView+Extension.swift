@@ -50,8 +50,8 @@ extension BMAppleMapView: MKMapViewDelegate {
     }
     
     public func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        if autoScaling {
-            print("regionDidChangeAnimated ❤️")
+        if autoScaling , let lastScaledAnnotation = lastScaledAnnotation {
+            scaleAnnotation(lastScaledAnnotation)
             autoScaling = false
         }
     }

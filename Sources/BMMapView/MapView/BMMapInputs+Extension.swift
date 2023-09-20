@@ -94,7 +94,8 @@ extension BMAppleMapView: BMMapInputType {
             lastSelectedAnnotationView = selectedAnnotationView
         } else {
             if selectedAnnotation != nil {
-                /// annotation is exists in apple map but the user is far away from the location so mapView.view(for: selectedAnnotation) this func can't find selectAnnotation view because it's not in the visible bounds
+                /// annotation is exists in apple map but the user is far away from the location so mapView.view(for: selectedAnnotation) this func can't find selectAnnotation view because it's not in the visible bounds.
+                lastScaledAnnotation = annotation
                 autoScaling = true
             } else {
                 debugPrint("💥 -  Can't find annotation")
