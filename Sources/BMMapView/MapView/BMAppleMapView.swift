@@ -51,7 +51,7 @@ extension BMAppleMapView {
     
     func setupPanGesture() {
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleMapDrag(_:)))
-        self.addGestureRecognizer(panGestureRecognizer)
+        mapView.addGestureRecognizer(panGestureRecognizer)
     }
     
     // Handle user-initiated map dragging.
