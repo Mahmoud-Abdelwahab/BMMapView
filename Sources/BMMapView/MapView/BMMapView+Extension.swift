@@ -23,7 +23,7 @@ extension BMAppleMapView: MKMapViewDelegate {
     
     public func mapView(_ mapView: MKMapView,
                         regionWillChangeAnimated animated: Bool) {
-        if animated && isUserDraggingMap {
+        if animated {
             centerOfCameraPosition = mapView.centerCoordinate
             delegate?.didDrageOnMap()
         }
@@ -60,10 +60,6 @@ extension BMAppleMapView: MKMapViewDelegate {
         if autoScaling , let lastScaledAnnotation = lastScaledAnnotation {
             scaleAnnotation(lastScaledAnnotation)
             autoScaling = false
-        }
-        
-        if animated && isUserDraggingMap {
-            isUserDraggingMap = false
         }
     }
 

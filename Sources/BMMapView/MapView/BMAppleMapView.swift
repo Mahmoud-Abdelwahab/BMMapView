@@ -19,7 +19,6 @@ public class BMAppleMapView: UIView {
     var autoScaling = false
     var defaultPinIcon: UIImage?
     var canShowCallout: Bool?
-    var isUserDraggingMap = false
     var lastSelectedAnnotationView: MKAnnotationView?
     var lastScaledAnnotation: BMAnnotation?
     let reuseIdentifier = "BMMapViewCell"
@@ -38,7 +37,6 @@ public class BMAppleMapView: UIView {
     
     private func commonInit() {
         setupUI()
-        setupPanGesture()
     }
 }
 
@@ -46,22 +44,7 @@ public class BMAppleMapView: UIView {
 extension BMAppleMapView {
     func setupUI() {
         loadViewFromNib()
-        
         mapView.delegate = self
-    }
-    
-    func setupPanGesture() {
-        mapView.isUserInteractionEnabled = true
-
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self.mapView, action: #selector(handleMapDrag(_:)))
-        mapView.addGestureRecognizer(panGestureRecognizer)
-    }
-    
-    // Handle user-initiated map dragging.
-    @objc func handleMapDrag(_ sender: UIPanGestureRecognizer) {
-        if sender.state == .began {
-            isUserDraggingMap = true
-        }
     }
 }
 
