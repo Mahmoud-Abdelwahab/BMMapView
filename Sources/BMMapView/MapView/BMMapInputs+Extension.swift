@@ -66,7 +66,7 @@ extension BMAppleMapView: BMMapInputType {
         }
         mapView.delegate = nil
         mapView.setCamera(camera, animated: animated)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             self.mapView.delegate = self
         }
     }
