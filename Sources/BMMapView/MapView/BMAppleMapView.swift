@@ -38,6 +38,7 @@ public class BMAppleMapView: UIView {
     
     private func commonInit() {
         setupUI()
+        setupPanGesture()
     }
 }
 
@@ -45,11 +46,13 @@ public class BMAppleMapView: UIView {
 extension BMAppleMapView {
     func setupUI() {
         loadViewFromNib()
-        setupPanGesture()
+        
         mapView.delegate = self
     }
     
     func setupPanGesture() {
+        mapView.isUserInteractionEnabled = true
+
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleMapDrag(_:)))
         mapView.addGestureRecognizer(panGestureRecognizer)
     }
