@@ -23,12 +23,18 @@ extension BMAppleMapView: MKMapViewDelegate {
     
     public func mapView(_ mapView: MKMapView,
                         regionWillChangeAnimated animated: Bool) {
-        if animated {
+        if animated && isUserDraggingMap {
             centerOfCameraPosition = mapView.centerCoordinate
             delegate?.didDrageOnMap()
         }
     }
     
+    private func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        if animated && isUserDraggingMap {
+            isUserDraggingMap = false
+        }
+    }
+        
     public func mapView(_ mapView: MKMapView,
                         viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation {
