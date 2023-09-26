@@ -23,10 +23,10 @@ extension BMAppleMapView: MKMapViewDelegate {
     
     public func mapView(_ mapView: MKMapView,
                         regionWillChangeAnimated animated: Bool) {
-            centerOfCameraPosition = mapView.centerCoordinate
-            delegate?.didDrageOnMap()
+        centerOfCameraPosition = mapView.centerCoordinate
+        delegate?.didDrageOnMap()
     }
-        
+    
     public func mapView(_ mapView: MKMapView,
                         viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation {
@@ -60,7 +60,7 @@ extension BMAppleMapView: MKMapViewDelegate {
             autoScaling = false
         }
     }
-
+    
     
     @objc private func pinAction(_ pinButton: AnnotationButton) {
         guard let annotationPointModel = pinButton.annotation else { return }

@@ -55,7 +55,6 @@ extension BMAppleMapView: BMMapInputType {
     public func animateToAnnotation(_ annotation: BMAnnotation,
                                     zoomLevel: Double? = nil,
                                     animated: Bool = true) {
-        mapView.delegate = nil
         let camera: MKMapCamera
         if let zoomLevel = zoomLevel {
             let currentZoom = getZoomLevel()
@@ -65,7 +64,7 @@ extension BMAppleMapView: BMMapInputType {
             camera = MKMapCamera(lookingAtCenter: annotation.coordinate,
                                  fromDistance: mapView.camera.altitude, pitch: 0, heading: 0)
         }
-        
+        mapView.delegate = nil
         mapView.setCamera(camera, animated: animated)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.mapView.delegate = self
