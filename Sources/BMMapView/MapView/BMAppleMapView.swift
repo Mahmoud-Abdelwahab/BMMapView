@@ -55,7 +55,7 @@ extension BMAppleMapView {
     }
     
     // Handle user-initiated map dragging.
-    @IBAction func handleMapDrag(_ sender: UIPanGestureRecognizer) {
+    @objc func handleMapDrag(_ sender: UIPanGestureRecognizer) {
         if sender.state == .began {
             isUserDraggingMap = true
         }
