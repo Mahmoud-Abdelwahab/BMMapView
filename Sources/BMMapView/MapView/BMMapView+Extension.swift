@@ -28,12 +28,6 @@ extension BMAppleMapView: MKMapViewDelegate {
             delegate?.didDrageOnMap()
         }
     }
-    
-    private func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        if animated && isUserDraggingMap {
-            isUserDraggingMap = false
-        }
-    }
         
     public func mapView(_ mapView: MKMapView,
                         viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -66,6 +60,10 @@ extension BMAppleMapView: MKMapViewDelegate {
         if autoScaling , let lastScaledAnnotation = lastScaledAnnotation {
             scaleAnnotation(lastScaledAnnotation)
             autoScaling = false
+        }
+        
+        if animated && isUserDraggingMap {
+            isUserDraggingMap = false
         }
     }
 
