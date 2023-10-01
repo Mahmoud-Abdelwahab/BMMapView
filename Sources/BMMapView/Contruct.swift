@@ -108,4 +108,8 @@ public extension BMMapInputType {
     func animateToAnnotation(_ annotation: BMAnnotation, zoomLevel: Double? = nil, animated: Bool = true) {
         animateToAnnotation(annotation, zoomLevel: zoomLevel, animated: animated)
     }
+    
+    func centerToAnnotation(_ annotations: BMAnnotation, regionRadius: Double? = 0.01) {
+        centerToAnnotation(annotations, regionRadius: regionRadius)
+    }
 }
