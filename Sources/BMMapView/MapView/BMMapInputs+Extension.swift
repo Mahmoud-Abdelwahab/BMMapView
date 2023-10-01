@@ -37,26 +37,14 @@ extension BMAppleMapView: BMMapInputType {
     
     public func centerToAnnotation(_ annotation: BMAnnotation,
                                    regionRadius: Double?) {
-//        var radius = REGION_RADIUS
-//        if let regionRadius = regionRadius {
-//            radius = regionRadius
-//        }
-//        let coordinateRegion = MKCoordinateRegion(
-//            center: annotation.coordinate,
-//            latitudinalMeters: radius,
-//            longitudinalMeters: radius)
-//        mapView.setRegion(coordinateRegion, animated: true)
-        
-        
-
-        let latDelta: CLLocationDegrees = 0.01 // Example latitude span (adjust according to your needs)
-        let lonDelta: CLLocationDegrees = 0.01 // Example longitude span (adjust according to your needs)
-        
-        let span = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: lonDelta)
+        var radius = SPAN
+        if let regionRadius = regionRadius {
+            radius = regionRadius
+        }
+        let span = MKCoordinateSpan(latitudeDelta: radius, longitudeDelta: radius)
         let location = CLLocationCoordinate2D(latitude: annotation.coordinate.latitude,
                                               longitude: annotation.coordinate.longitude)
         let region = MKCoordinateRegion(center: location, span: span)
-        
         mapView.setRegion(region, animated: true)
     }
     
